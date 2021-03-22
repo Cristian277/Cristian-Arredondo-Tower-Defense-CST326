@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    // Update is called once per frame
+    public Enemy [] enemies;
+    public Purse playerPurse;
+
     void Update()
     {
         RaycastHit hit;
@@ -14,15 +18,16 @@ public class Player : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.gameObject.name == "BigBadGuy")
-                {
-                    Debug.Log("Big Bad guy Hit");
+                    if (hit.collider.gameObject.name == "BigBadGuy")
+                    {
+                        enemies[0].decreaseEnemyHealth();
+                    }
+                    else if (hit.collider.gameObject.name == "SmallBadGuy")
+                    {
+                        enemies[1].decreaseEnemyHealth();
+                    }
                 }
-                else if (hit.collider.gameObject.name == "SmallBadGuy")
-                {
-                    Debug.Log("Small Bad guy Hit");
-                }
+               
             }
         }
     }
-}

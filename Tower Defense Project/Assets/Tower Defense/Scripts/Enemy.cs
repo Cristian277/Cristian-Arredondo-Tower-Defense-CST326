@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
   private int index = 0;
   private Vector3 nextWaypoint;
   private bool stop = false;
+  public Purse purse;
 
   void Awake()
   {
@@ -20,7 +21,18 @@ public class Enemy : MonoBehaviour
     Recalculate();
   }
 
-  void Update()
+    void Start()
+    {
+        if(this.gameObject.name == "BigBadGuy")
+        {
+            health = 50;
+        }else if(this.gameObject.name == "SmallBadGuy")
+        {
+            health = 20;
+        }
+    }
+
+    void Update()
   {
     if (!stop)
     {
@@ -30,11 +42,9 @@ public class Enemy : MonoBehaviour
         Recalculate();
       }
 
-
       Vector3 moveThisFrame = nextWaypoint * Time.deltaTime * speed;
       transform.Translate(moveThisFrame);
     }
-
     }
 
   void Recalculate()
@@ -49,4 +59,16 @@ public class Enemy : MonoBehaviour
       stop = true;
     }
   }
+
+    public void decreaseEnemyHealth()
+    {
+        health -= 10;
+        Debug.Log("Enemy is at " + health + " health");
+        if (health <= 0)
+        {
+            Debug.Log("Enemy has been killed!");
+            Destroy(this.gameObject);
+            purse.increaseCoinCount();
+        }
+    }
 }
