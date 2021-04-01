@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -7,29 +8,25 @@ public class Enemy : MonoBehaviour
   public Path route;
   private Waypoint[] myPathThroughLife;
   public int coinWorth;
-  public float health;
+  public float health = 100;
   public float speed = .25f;
   private int index = 0;
   private Vector3 nextWaypoint;
   private bool stop = false;
-  public Purse purse;
+  private float healthPerUnit;
 
-    void Start()
-    {
-        myPathThroughLife = route.path;
-        transform.position = myPathThroughLife[index].transform.position;
-        Recalculate();
+  public Transform healthBar;
 
-        if (this.gameObject.name == "BigBadGuy")
-        {
-            health = 50;
-        }else if(this.gameObject.name == "SmallBadGuy")
-        {
-            health = 20;
-        }
-    }
+  void Start()
+  {
+    healthPerUnit = 100f / health;
 
-    void Update()
+    myPathThroughLife = route.path;
+    transform.position = myPathThroughLife[index].transform.position;
+    Recalculate();
+  }
+
+  void Update()
   {
     if (!stop)
     {
@@ -39,10 +36,12 @@ public class Enemy : MonoBehaviour
         Recalculate();
       }
 
+
       Vector3 moveThisFrame = nextWaypoint * Time.deltaTime * speed;
       transform.Translate(moveThisFrame);
     }
-    }
+
+  }
 
   void Recalculate()
   {
@@ -57,15 +56,20 @@ public class Enemy : MonoBehaviour
     }
   }
 
-    public void decreaseEnemyHealth()
+  public bool Damage()
+  {
+    health -= 20;
+    if (health <= 0)
     {
-        health -= 10;
-        Debug.Log("Enemy is at " + health + " health");
-        if (health <= 0)
-        {
-            Debug.Log("Enemy has been killed!");
-            Destroy(this.gameObject);
-            purse.increaseCoinCount();
-        }
+      Debug.Log($"{transform.name} is Dead");
+      Destroy(this.gameObject);
+      return false;
     }
+
+    float percentage = healthPerUnit * health;
+    Vector3 newHealthAmount = new Vector3(percentage/100f , healthBar.localScale.y, healthBar.localScale.z);
+    healthBar.localScale = newHealthAmount;
+    return true;
+  }
+
 }

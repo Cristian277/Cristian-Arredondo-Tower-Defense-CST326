@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public Enemy [] enemies;
     public Purse playerPurse;
 
+    /*
     void Update()
     {
         RaycastHit hit;
@@ -30,4 +31,5 @@ public class Player : MonoBehaviour
                
             }
         }
+    */
     }
