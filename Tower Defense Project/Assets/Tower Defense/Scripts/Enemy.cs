@@ -14,16 +14,13 @@ public class Enemy : MonoBehaviour
   private bool stop = false;
   public Purse purse;
 
-  void Awake()
-  {
-    myPathThroughLife = route.path;
-    transform.position = myPathThroughLife[index].transform.position;
-    Recalculate();
-  }
-
     void Start()
     {
-        if(this.gameObject.name == "BigBadGuy")
+        myPathThroughLife = route.path;
+        transform.position = myPathThroughLife[index].transform.position;
+        Recalculate();
+
+        if (this.gameObject.name == "BigBadGuy")
         {
             health = 50;
         }else if(this.gameObject.name == "SmallBadGuy")
