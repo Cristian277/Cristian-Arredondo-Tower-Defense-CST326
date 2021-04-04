@@ -56,9 +56,9 @@ public class Enemy : MonoBehaviour
     }
   }
 
-  public bool Damage()
-  {
-    health -= 20;
+    public bool Damage(){
+    health -= 10;
+
     if (health <= 0)
     {
       Debug.Log($"{transform.name} is Dead");

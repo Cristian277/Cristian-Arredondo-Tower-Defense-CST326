@@ -15,23 +15,19 @@ public class PlaceTower9001 : MonoBehaviour
       {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
         RaycastHit hit;
+
         if (Physics.Raycast(ray, out hit))
-          if (hit.transform.tag == "TowerSpot" && purse.getCoinCount()>=10)
+          if (hit.transform.tag == "TowerSpot" && purse.getCoinCount()>=20)
           {
             purse.purchaseTower();
             hit.transform.gameObject.SetActive(false);
             PlaceTower(hit.transform.position);
           }
-        else if(hit.transform.tag == "TowerSpot" && purse.getCoinCount() < 10)
+        else if(hit.transform.tag == "TowerSpot" && purse.getCoinCount() < 20)
          {
              Debug.Log("Not enough money to buy tower.");
          }
     }
-
-    //raycast
-    //hitplace
-    //purse script $$$$
-    //instantiate a tower
 
   }
 

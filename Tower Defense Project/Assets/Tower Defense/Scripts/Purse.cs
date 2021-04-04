@@ -28,7 +28,7 @@ public class Purse : MonoBehaviour
 
     public void purchaseTower()
     {
-        playerCoins -= 10;
+        playerCoins -= 20;
         Debug.Log("Player has purchased a tower " + playerCoins + " coins left.");
         coinsText.GetComponent<TextMeshProUGUI>().text = String.Format("{0:0000}", playerCoins);
     }
