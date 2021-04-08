@@ -1,29 +1,35 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Tester : MonoBehaviour
 {
-    public Purse purse;
-    
-    void Update()
-    {
-      if (Input.GetMouseButtonDown(0))
-      {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y,
-        Camera.main.transform.position.z));
-        RaycastHit hit;
+  public Purse purse;
 
-        if (Physics.Raycast(ray, out hit))
-          if (hit.transform.tag == "Enemy")
-          {
-                    if (!hit.transform.GetComponent<Enemy>().Damage())
-                    {
-                        purse.increaseCoinCount();
-                    }
-          }
+  void Update()
+  {
+    if (Input.GetMouseButtonDown(0))
+    {
+      Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y,
+        Camera.main.transform.position.z));
+
+      RaycastHit[] hits;
+      hits = Physics.RaycastAll(ray.origin, ray.direction, 100.0F);
+
+      for (int i = 0; i < hits.Length; i++)
+      {
+        RaycastHit hit = hits[i];
+
+        if (hit.transform.tag == "Enemy")
+        {
+            hit.transform.GetComponent<Enemy>().Damage();
+
+            if (!hit.transform.GetComponent<Enemy>().Damage()){
+                purse.increaseCoinCount();
+            }
+        }
       }
+
     }
+  }
 }

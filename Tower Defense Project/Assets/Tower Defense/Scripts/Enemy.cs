@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour
   private float healthPerUnit;
 
   public Transform healthBar;
+
+  public UnityEvent DeathEvent;
 
   void Start()
   {
@@ -56,12 +59,14 @@ public class Enemy : MonoBehaviour
     }
   }
 
-    public bool Damage(){
+  public bool Damage()
+  {
     health -= 10;
-
     if (health <= 0)
     {
       Debug.Log($"{transform.name} is Dead");
+      DeathEvent.Invoke();
+
       Destroy(this.gameObject);
       return false;
     }
