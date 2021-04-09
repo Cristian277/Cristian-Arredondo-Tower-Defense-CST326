@@ -39,7 +39,6 @@ public class Enemy : MonoBehaviour
         Recalculate();
       }
 
-
       Vector3 moveThisFrame = nextWaypoint * Time.deltaTime * speed;
       transform.Translate(moveThisFrame);
     }
