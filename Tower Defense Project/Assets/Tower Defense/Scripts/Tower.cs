@@ -1,35 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Tower : MonoBehaviour
 {
-  public List<Enemy> currentEnemies;
-  public Enemy currentTarget;
+    public List<Enemy> currentEnemies;
+    public Enemy currentTarget;
+    public Transform turret;
+    private delegate void enemySubscription(Enemy enemy);
 
+    private LineRenderer laser;
+    public float hitAmount = 10;
 
-  void OnTriggerEnter(Collider collider)
-  {
-    if (collider.GetComponent<Enemy>() != null)
+    void Start()
     {
-      Enemy newEnemy = collider.GetComponent<Enemy>();
-      newEnemy.DeathEvent.AddListener(delegate { BookKeeping(newEnemy);});
-      currentEnemies.Add(newEnemy);
-      Debug.Log(newEnemy.name);
+        laser = GetComponent<LineRenderer>();
+        laser.SetPosition(0,turret.transform.position);
     }
-  }
 
-  void OnTriggerExit(Collider collider)
-  {
-    if (collider.GetComponent<Enemy>() != null)
+    void Update()
     {
-      Enemy oldEnemy = collider.GetComponent<Enemy>();
-      BookKeeping(oldEnemy);
-    }
-  }
+        if (currentTarget)
+        {
+            laser.enabled = true;
+            laser.SetPosition(1, currentTarget.transform.position);
+            currentTarget.Damage(hitAmount * Time.deltaTime);
+            
+        }
+        else
+        {
+            laser.enabled = false;
+        }
 
-  void BookKeeping(Enemy enemy)
-  {
-    currentEnemies.Remove(enemy);
-  }
+        if (FindObjectOfType<Enemy>() == null)
+        {
+            SceneManager.LoadScene(2);
+            Debug.Log("You win!");
+        }
+       
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.GetComponent<Enemy>() != null)
+        {
+            Enemy newEnemy = collider.GetComponent<Enemy>();
+            newEnemy.DeathEvent.AddListener(delegate { BookKeeping(newEnemy); });
+            currentEnemies.Add(newEnemy);
+            if (currentTarget == null) currentTarget = newEnemy;
+        }
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        if (collider.GetComponent<Enemy>() != null)
+        {
+            Enemy oldEnemy = collider.GetComponent<Enemy>();
+            BookKeeping(oldEnemy);
+        }
+    }
+
+    void BookKeeping(Enemy enemy)
+    {
+        currentEnemies.Remove(enemy);
+        currentTarget = (currentEnemies.Count > 0) ? currentEnemies[0] : null;
+
+    }
 }

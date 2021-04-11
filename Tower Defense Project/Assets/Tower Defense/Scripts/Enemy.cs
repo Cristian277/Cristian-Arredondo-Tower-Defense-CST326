@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
   private Vector3 nextWaypoint;
   private bool stop = false;
   private float healthPerUnit;
+  public Purse purse;
 
   public Transform healthBar;
 
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
 
   void Start()
   {
+    purse = (Purse)FindObjectOfType(typeof(Purse));
     healthPerUnit = 100f / health;
 
     myPathThroughLife = route.path;
@@ -38,6 +40,7 @@ public class Enemy : MonoBehaviour
         index = index + 1;
         Recalculate();
       }
+
 
       Vector3 moveThisFrame = nextWaypoint * Time.deltaTime * speed;
       transform.Translate(moveThisFrame);
@@ -58,22 +61,26 @@ public class Enemy : MonoBehaviour
     }
   }
 
-  public bool Damage()
+  public void Damage()
   {
-    health -= 10;
+    Damage(20);
+  }
+
+  public void Damage(float hitAmount)
+  {
+    health -= hitAmount;
+
     if (health <= 0)
     {
       Debug.Log($"{transform.name} is Dead");
       DeathEvent.Invoke();
-
+      DeathEvent.RemoveAllListeners();
+      purse.increaseCoinCount();
       Destroy(this.gameObject);
-      return false;
     }
 
     float percentage = healthPerUnit * health;
-    Vector3 newHealthAmount = new Vector3(percentage/100f , healthBar.localScale.y, healthBar.localScale.z);
+    Vector3 newHealthAmount = new Vector3(percentage / 100f, healthBar.localScale.y, healthBar.localScale.z);
     healthBar.localScale = newHealthAmount;
-    return true;
   }
-
 }

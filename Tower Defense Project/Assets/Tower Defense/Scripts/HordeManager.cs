@@ -10,7 +10,6 @@ public class HordeManager : MonoBehaviour
   public Wave enemyWave;
   public Path enemyPath;
 
-
   IEnumerator Start()
   {
 
@@ -21,9 +20,6 @@ public class HordeManager : MonoBehaviour
 
   }
 
-  //pick our enemy to spawn
-  //spawn it
-  //wait
   IEnumerator SpawnSmallEnemies()
   {
     for (int i = 0; i < enemyWave.groupsOfEnemiesInWave.Length; i++)
@@ -42,8 +38,8 @@ public class HordeManager : MonoBehaviour
 
   }
 
-    IEnumerator SpawnBigEnemies()
-    {
+  IEnumerator SpawnBigEnemies()
+  {
         for (int i = 0; i < enemyWave.groupsOfEnemiesInWave.Length; i++)
         {
             for (int j = 0; j < enemyWave.groupsOfEnemiesInWave[i].numberOfLarge; j++)

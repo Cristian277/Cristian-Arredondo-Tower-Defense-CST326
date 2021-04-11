@@ -33,7 +33,6 @@ public class PlaceTower9001 : MonoBehaviour
 
     void PlaceTower(Vector3 position)
     {
-        //Book keeping
         Instantiate(Tower, position, Quaternion.identity, World.transform);
     }
 }

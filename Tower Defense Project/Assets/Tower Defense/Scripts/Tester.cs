@@ -11,7 +11,7 @@ public class Tester : MonoBehaviour
     if (Input.GetMouseButtonDown(0))
     {
       Ray ray = Camera.main.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y,
-      Camera.main.transform.position.z));
+        Camera.main.transform.position.z));
 
       RaycastHit[] hits;
       hits = Physics.RaycastAll(ray.origin, ray.direction, 100.0F);
@@ -22,13 +22,9 @@ public class Tester : MonoBehaviour
 
         if (hit.transform.tag == "Enemy")
         {
-            hit.transform.GetComponent<Enemy>().Damage();
-
-            if (!hit.transform.GetComponent<Enemy>().Damage()){
-                purse.increaseCoinCount();
-            }
+          hit.transform.GetComponent<Enemy>().Damage();
         }
-      }
+       }
 
     }
   }
