@@ -58,7 +58,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590278925480483114}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.5, y: 0.5337372, z: 4.160825}
+  m_LocalPosition: {x: 0.5, y: 0.6337372, z: 4.160825}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 7164262301629113792}
@@ -332,6 +332,9 @@ MonoBehaviour:
   coinWorth: 0
   health: 100
   speed: 0.25
+  purse: {fileID: 0}
+  deathParticles: {fileID: 8843309679590025149, guid: a6c9180972be943ae8a27baef47d9881,
+    type: 3}
   healthBar: {fileID: 5220369140860742584}
   DeathEvent:
     m_PersistentCalls:

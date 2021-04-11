@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
   private bool stop = false;
   private float healthPerUnit;
   public Purse purse;
+  public GameObject deathParticles;
 
   public Transform healthBar;
 
@@ -72,6 +73,7 @@ public class Enemy : MonoBehaviour
 
     if (health <= 0)
     {
+      Instantiate(deathParticles, transform.position,Quaternion.identity);
       Debug.Log($"{transform.name} is Dead");
       DeathEvent.Invoke();
       DeathEvent.RemoveAllListeners();

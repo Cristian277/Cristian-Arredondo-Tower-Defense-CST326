@@ -57,7 +57,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,7 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &8585744690571337376
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -153,7 +151,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -178,7 +175,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &4149019569921038952
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -283,7 +279,6 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -308,7 +303,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &5988872162163278226
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -338,7 +332,13 @@ MonoBehaviour:
   coinWorth: 0
   health: 40
   speed: 0.5
+  purse: {fileID: 0}
+  deathParticles: {fileID: 99835661182942174, guid: d811ca30ffe324b658f9ad954084bb99,
+    type: 3}
   healthBar: {fileID: 3007171618602130558}
+  DeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &1950677736069950590
 Rigidbody:
   m_ObjectHideFlags: 0
