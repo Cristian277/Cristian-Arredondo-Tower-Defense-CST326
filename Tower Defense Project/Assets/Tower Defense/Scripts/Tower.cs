@@ -35,6 +35,7 @@ public class Tower : MonoBehaviour
 
         if (FindObjectOfType<Enemy>() == null)
         {
+            PlayerPrefs.SetString("Win/Loss", "You win!");
             SceneManager.LoadScene(2);
             Debug.Log("You win!");
         }
